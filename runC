@@ -1,0 +1,7 @@
+#!/bin/bash
+
+cd /home/ubuntu/sprout/sourdough
+./autogen.sh && ./configure && make
+
+cd /home/ubuntu/sprout/sourdough/datagrump
+./run-contest samd 2>&1 #>ack_stats.txt#| grep 'Average\|95th\|   http' >/home/ubuntu/sprout/rtt.txt

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /home/ubuntu/sprout/sourdough/datagrump
+./run-contest brandon_and_sam 2>&1 #>ack_stats.txt#| grep 'Average\|95th\|   http' >/home/ubuntu/sprout/rtt.txt
