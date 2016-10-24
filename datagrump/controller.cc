@@ -26,7 +26,7 @@ int error_sum = 0;
 int d_error = 0;
 int rtt_old = 0;
 
-/*Best so far
+/*Best results so far
 	
 float kp = -0.076;			//The proportional coefficient
 float ki = -0.00003;		//The integral coefficient
@@ -43,9 +43,10 @@ Average throughput: 3.53 Mbits/s (70.0% utilization)
 95th percentile signal delay: 104 ms
 Power: 33.69
 http://cs344g.keithw.org/report/?brandonandsam-1477286548-eengaufi
+*/
 
-
-//Best Without Nudge
+/*
+//Best results without error_threshold_nudge
 float kp = -0.06;			//The proportional coefficient
 float ki = -0.00003;		//The integral coefficient
 float kd = -0.0205;			//The derrivative coefficient
@@ -55,10 +56,6 @@ int error_sum_bound = 600;
 int error_reset_threshold = 5;
 */
 
-//int last_rtt = 0;
-//int rtt_threshold = 5;
-//int increase_amount = 1;
-//float decrease_ratio = 0.75;
 
 /* Default constructor */
 Controller::Controller( const bool debug )
@@ -100,7 +97,6 @@ void Controller::ack_received( const uint64_t sequence_number_acked,
 			       const uint64_t timestamp_ack_received )
                                /* when the ack was received (by sender) */
 {
-  
   //Measure the RTT for the ACKed packet
   int rtt = timestamp_ack_received - send_timestamp_acked;
   
@@ -109,18 +105,26 @@ void Controller::ack_received( const uint64_t sequence_number_acked,
 	  rtt_old = rtt;
   }
   
+  /*Set the error value based on the RTT's difference from the last RTT
+  and its distance from max_rtt and min_rtt
+  */
   int error = 0;
   if (rtt > max_rtt){
-	  //If the RTT is above a certain threshold, set the error to
-	  //the difference between the RTT and that threshold
+	  /*If the RTT is above a certain threshold, set the error to
+	  the difference between the RTT and that threshold, then decrease
+	  the error slightly to nudge it back withint the threshold faster
+	  */
 	  error = (rtt - max_rtt) - error_threshold_nudge;
   } else if (rtt < min_rtt){
-	  //If the RTT is below a certain threshold, set the error to
-	  //the difference between the RTT and that threshold
+	  /*If the RTT is below a certain threshold, set the error to
+	  the difference between the RTT and that threshold, then increase
+	  the error slightly to nudge it back withint the threshold faster
+	  */
 	  error = (rtt - min_rtt) + error_threshold_nudge;
   }else{
-	  //Otherwise, set the error to the diffence between the current RTT
-	  //and the RTT from the previous ACK
+	  /*Otherwise, set the error to the diffence between the current RTT
+	  and the RTT from the previous ACK
+	  */
       error = rtt - rtt_old;
   }
   
@@ -160,8 +164,8 @@ void Controller::ack_received( const uint64_t sequence_number_acked,
   
   cerr << "\n\n        Time: " << timestamp_ack_received
        << "\n      Window: " << the_window_size
-       //<< "\n           w: " << w
        << "\n         RTT: " << rtt;
+       //<< "\n           w: " << w
        //<< "\n   RTT Error: " << error
        //<< "\n   Error Sum: " << error_sum
        //<< "\nError Change: " << d_error;
@@ -179,5 +183,5 @@ void Controller::ack_received( const uint64_t sequence_number_acked,
    before sending one more datagram */
 unsigned int Controller::timeout_ms( void )
 {
-  return 100; /* timeout of one second */
+  return 100; /* timeout of 100ms */
 }

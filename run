@@ -1,7 +1,11 @@
 #!/bin/bash
 
-cd /home/ubuntu/sprout/sourdough
+#Recompile the code
 ./autogen.sh && ./configure && make
 
-cd /home/ubuntu/sprout/sourdough/datagrump
-./run-contest brandon_and_sam_ATT 2>&1 #>ack_stats.txt#| grep 'Average\|95th\|   http' >/home/ubuntu/sprout/rtt.txt
+#Wait a few seconds to check that it has compiled without errors
+sleep 3
+
+#Run run-contest
+cd ./datagrump
+./run-contest brandon_and_sam 2>&1
