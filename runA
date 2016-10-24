@@ -1,7 +1,0 @@
-#!/bin/bash
-
-cd /home/ubuntu/sprout/sourdough
-./autogen.sh && ./configure && make
-
-cd /home/ubuntu/sprout/sourdough/datagrump
-./run-contest samd 2>&1 | grep 'Average\|95th\|   http' >/home/ubuntu/sprout/fixed_window/$1.txt
