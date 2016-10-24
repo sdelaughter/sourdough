@@ -46,7 +46,7 @@ http://cs344g.keithw.org/report/?brandonandsam-1477286548-eengaufi
 
 //Parameters Used
 float kp = -0.076;			//The proportional coefficient
-float ki = -0.00003;		//The integral coefficient
+float ki = -0.000032;		//The integral coefficient
 float kd = -0.01;			//The derrivative coefficient
 int max_rtt = 105;
 int min_rtt = 62;
