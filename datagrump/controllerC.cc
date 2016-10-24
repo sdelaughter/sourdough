@@ -51,7 +51,7 @@ void Controller::ack_received( const uint64_t sequence_number_acked,
   //the_window_size +=1;
   int rtt = timestamp_ack_received - send_timestamp_acked;
   if (rtt > 70) {
-	  the_window_size *= 0.5;
+	  the_window_size *= 0.75;
 	  if (the_window_size < 1){
 		  the_window_size = 1;
 	  }

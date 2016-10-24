@@ -63,7 +63,7 @@ void Controller::ack_received( const uint64_t sequence_number_acked,
 
 /* A packet was lost */
 void Controller::packet_lost( void ){
-	the_window_size *= 0.5;
+	the_window_size *= 0.75;
 	//cerr << "Window size (loss): " << the_window_size ;
 }
 
