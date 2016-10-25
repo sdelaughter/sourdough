@@ -1,4 +1,4 @@
-#CEFGW: A PID Controller for Steady Delays and High Thorughputs on Cellular Networks with Unpredictable and Highly Variable Link Capacity
+#CEFGW: A PID Controller for Stabilizing Delay while Maximizing Thorughput on Cellular Networks with Unpredictable and Highly Variable Link Capacity
 
 ##by Sam DeLaughter and Brandon Karpf
 
