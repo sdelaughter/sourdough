@@ -1,4 +1,4 @@
-A PID Controller for Stabilizing Delay while Maximizing Thorughput on Cellular Networks with Unpredictable and Highly Variable Link Capacity
+#A PID Controller for Stabilizing Delay while Maximizing Thorughput on Cellular Networks with Unpredictable and Highly Variable Link Capacity
 
 ##by Sam DeLaughter and Brandon Karpf
 
